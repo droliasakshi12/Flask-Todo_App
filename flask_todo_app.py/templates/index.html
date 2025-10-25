@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap demo</title>
+</head>
+
+<body>
+  <!doctype html>
+  <html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap Navbar Demo</title>
+
+    <!-- ✅ Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <!-- ✅ Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid justify-content-center">
+
+        <a class="navbar-brand" href="#">MY TODO LIST 📔</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        </form>
+      </div>
+    </nav>
+
+
+    <!--form table -->
+    <div class="container">
+      <form action="/add_items" method="post">
+        <div class="mb-3">
+          <label for="titles" class="form-label">Title✏️</label>
+          <input type="text" class="form-control" name="title" id="titles" aria-describedby="your_title">
+          <div id="your_title" class="form-text">We make sure you won't forget things😊!!</div>
+        </div>
+        <div class="mb-3">
+          <label for="descrip" class="form-label">Description</label>
+          <input type="text" class="form-control" name="descp" id="descrip">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add To List</button>
+      </form>
+    </div>
+    <!--display data -->
+    <div class="container my-3">
+
+      <form action="/display_list" method="get">
+        <table class="table table-striped table-bordered mt-3">
+          <thead>
+            <br>
+          </thead>
+        </table>
+      </form>
+
+      <h2> Your TODOs</h2>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Sno</th>
+            <th scope="col">Title</th>
+            <th scope="colgroup">Description</th>
+            <th scope="col">Date</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for row in todos %}
+          <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+
+            <td>
+              <form action="/delete" method="post" style="display:inline;">
+                <input type="hidden" name="sno" value="{{ row[0] }}">
+                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+              </form>
+            </td>
+
+            <td>
+              <form action="/updating_form" method="post" style="display:inline;">
+                <input type="hidden" name="sno" value="{{ row[0] }}">
+                <button type="submit" class="btn btn-primary btn-sm">Update</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      </form>
+    </div>
+
+
+  <!--make a new page for updating details !!-->
+<!--       
+
+
+
+    <!-- ✅ Bootstrap JS (for dropdown + responsive toggle to work) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+  </body>
+
+  </html>
